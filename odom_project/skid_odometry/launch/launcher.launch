@@ -1,0 +1,5 @@
+<launch>
+
+    <node pkg="skid_odometry" type="skid_odometry" name="skid_odometer" output="screen" />
+    
+</launch>

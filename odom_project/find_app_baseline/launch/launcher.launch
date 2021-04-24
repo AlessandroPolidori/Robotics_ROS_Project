@@ -1,0 +1,7 @@
+<launch>
+
+    <node pkg="find_app_baseline" type="app_baseline" name="baseline_finder" output="screen" launch-prefix="gnome-terminal --command"/>
+    
+    <node pkg="rosbag" type="play" name="motors_playback" output="screen" args=" $(find find_app_baseline)/bag1.bag"/>
+
+</launch>

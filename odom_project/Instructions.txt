@@ -1,0 +1,33 @@
+CHANGING ODOM STARTING POINT (NON DYN. PARAMETERS):
+
+rosparam set starting_x_param "numero"
+rosparam set starting_y_param "numero"
+rosparam set starting_theta_param "numero"
+
+SERVICES:
+
+rosservice call /reset_odometry
+rosservice call /set_odometry "x" "y" "theta"
+
+CHANGING INTEGRATION METHOD USING DYNAMIC PARAMETER:
+
+rosrun 	rqt_reconfigure rqt_reconfigure
+
+
+ONE METHOD TO CALCULATE THE HIDDEN GEAR RATIO (manufacturer's manual is wrong, it's not 1:30):
+
+
+        rpm_r = (fr->rpm + rr->rpm)/(2); // averaging the rpm  right and left values to reduce noise
+		rpm_l = (fl->rpm + rl->rpm)/(2);
+		vr = (rpm_r * (2 * 3.1416) * 1.575)/600; //right wheel linear velocity
+		vl = -(rpm_l * (2 * 3.1416) * 1.575)/600; // left wheel linear velocity
+		
+		wrong_v_linear = (vr + vl) /2
+		
+		gear_ratio = wrong_v_linear / scout_odometry_linear_velocity
+
+The best thing would be to find the average value, cleaning data from ouliers caused by noise. But we already know that the value is between 1:35 and 1:40
+We found empirically that considering a gear ratio of 38.5 allows to obtain an odometry really precise wrt the manufacturer's one.
+
+
+Finally, to find the baseline we just applied the simple equation (taken from classic differential kinematics): app_baseline = (vr-vl)/w
