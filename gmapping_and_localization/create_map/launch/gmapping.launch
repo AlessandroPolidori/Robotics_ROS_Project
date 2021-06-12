@@ -1,0 +1,25 @@
+<launch>
+  
+ 
+  <arg name="odom_frame_id"   default="scout/odom"/>
+  <arg name="global_frame_id" default="map"/>
+
+  <param name="/use_sim_time" value="true"/>
+
+  <node pkg="tf" 
+        type="static_transform_publisher" 
+        name="baseToLaser_broadcaster" 
+        args="0 0 0 0 0 0.766 0.643 scout/base_link laser 100" />
+        
+  
+ 
+  
+  <include file="$(find create_map)/launch/gmapping.launch.xml"/> 
+
+
+
+
+
+  
+</launch>
+
