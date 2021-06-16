@@ -1,5 +1,5 @@
 # Robotics_ROS_Project
-2020/2021 Robotics course project <br />
+2020/2021 Robotics course project, prof. Matteo Matteucci <br />
 first part: computing an odometry giving the opportunity to choose between Euler and Runge-Kutta integration methods <br />
  <br />
 ![](odometry.gif)
